@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amal Hassen - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .background-grid {
+            position: fixed;
+            inset: 0;
+            opacity: 0.1;
+            pointer-events: none;
+            background-image: 
+                linear-gradient(rgba(96, 165, 250, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(96, 165, 250, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header / Hero */
+        header {
+            padding: 80px 0 60px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .header-content {
+            display: flex;
+            gap: 48px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .header-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .profile-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 16px;
+            object-fit: cover;
+            border: 3px solid rgba(34, 211, 238, 0.3);
+            box-shadow: 0 20px 60px rgba(34, 211, 238, 0.2);
+            animation: photoFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes photoFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            font-size: 64px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #60a5fa, #22d3ee, #14b8a6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: 24px;
+            color: #94a3b8;
+            margin-bottom: 24px;
+        }
+
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .social-link {
+            padding: 8px 16px;
+            background: rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(96, 165, 250, 0.3);
+            border-radius: 8px;
+            color: #22d3ee;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: rgba(59, 130, 246, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(34, 211, 238, 0.2);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #22d3ee, #3b82f6);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(34, 211, 238, 0.3);
+        }
+
+        .btn-secondary {
+            padding: 12px 24px;
+            background: transparent;
+            border: 2px solid rgba(34, 211, 238, 0.5);
+            border-radius: 8px;
+            color: #22d3ee;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(34, 211, 238, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(71, 85, 105, 0.5);
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            gap: 32px;
+            overflow-x: auto;
+        }
+
+        .nav-btn {
+            padding: 16px 8px;
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            color: #94a3b8;
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: capitalize;
+            white-space: nowrap;
+        }
+
+        .nav-btn:hover {
+            color: #e2e8f0;
+        }
+
+        .nav-btn.active {
+            border-bottom-color: #22d3ee;
+            color: #22d3ee;
+        }
+
+        /* Main Content */
+        main {
+            padding: 64px 0;
+            min-height: 60vh;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-line {
+            width: 4px;
+            height: 32px;
+            background: linear-gradient(180deg, #22d3ee, #3b82f6);
+            border-radius: 4px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 32px;
+            margin-bottom: 48px;
+        }
+
+        .about-text {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(71, 85, 105, 0.5);
+            border-radius: 12px;
+            padding: 32px;
+            line-height: 1.8;
+            color: #cbd5e1;
+        }
+
+        .about-highlights {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .highlight-card {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(71, 85, 105, 0.5);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .highlight-card h3 {
+            font-size: 16px;
+            color: #22d3ee;
+            margin-bottom: 8px;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .highlight-card p {
+            font-size: 14px;
+            color: #94a3b8;
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #22d3ee, #3b82f6, transparent);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            padding: 24px;
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(71, 85, 105, 0.5);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            border-color: rgba(34, 211, 238, 0.5);
+            transform: translateX(4px);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -48px;
+            top: 30px;
+            width: 12px;
+            height: 12px;
+            background: #22d3ee;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.2);
+        }
+
+        .timeline-header {
+            margin-bottom: 12px;
+        }
+
+        .timeline-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 4px;
+        }
+
+        .timeline-company {
+            font-size: 16px;
+            color: #22d3ee;
+            margin-bottom: 4px;
+        }
+
+        .timeline-date {
+            font-size: 14px;
+            color: #94a3b8;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .timeline-description {
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        .timeline-description li {
+            margin-bottom: 8px;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+
+        .skill-category {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(71, 85, 105, 0.5);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .skill-category h3 {
+            font-size: 18px;
+            color: #22d3ee;
+            margin-bottom: 16px;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            padding: 6px 12px;
+            background: rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(96, 165, 250, 0.3);
+            border-radius: 6px;
+            font-size: 13px;
+            color: #93c5fd;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+        }
+
+        .project-card {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(71, 85, 105, 0.5);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            border-color: rgba(34, 211, 238, 0.5);
+            box-shadow: 0 10px 40px rgba(34, 211, 238, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .project-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(168, 85, 247, 0.2);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 4px;
+            font-size: 12px;
+            color: #c084fc;
+            margin-bottom: 12px;
+        }
+
+        .project-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .project-description {
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tech-pill {
+            padding: 4px 10px;
+            background: rgba(74, 144, 226, 0.2);
+            border-radius: 4px;
+            font-size: 12px;
+            color: #60a5fa;
+            font-family: 'Space Mono', monospace;
+        }
+
+        /* Certifications */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .cert-card {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(71, 85, 105, 0.5);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: start;
+            gap: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .cert-card:hover {
+            border-color: rgba(34, 211, 238, 0.5);
+            transform: translateX(4px);
+        }
+
+        .cert-icon {
+            font-size: 32px;
+            flex-shrink: 0;
+        }
+
+        .cert-content h3 {
+            font-size: 16px;
+            margin-bottom: 4px;
+            color: white;
+        }
+
+        .cert-issuer {
+            font-size: 14px;
+            color: #22d3ee;
+            margin-bottom: 4px;
+        }
+
+        .cert-date {
+            font-size: 13px;
+            color: #94a3b8;
+            font-family: 'Space Mono', monospace;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 80px;
+            padding: 48px 0;
+            border-top: 1px solid rgba(71, 85, 105, 0.5);
+            background: rgba(15, 23, 42, 0.5);
+        }
+
+        footer h2 {
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        .footer-desc {
+            color: #94a3b8;
+            max-width: 700px;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            font-size: 14px;
+        }
+
+        .contact-links a {
+            color: #22d3ee;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-links a:hover {
+            color: #67e8f9;
+        }
+
+        .contact-links span {
+            color: #64748b;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 48px;
+            }
+
+            .header-content {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+
+            .profile-photo {
+                margin: 0 auto;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-container {
+                gap: 16px;
+            }
+
+            .social-links,
+            .cta-buttons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-grid"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="header-text">
+                    <h1>
+                        <span class="gradient-text">Amal Hassen</span>
+                    </h1>
+                    <p class="tagline">CS Student | Software Engineer | Security Analyst | Product Manager</p>
+                    
+                    <div style="margin-bottom: 24px; padding: 16px; background: rgba(34, 211, 238, 0.1); border-left: 3px solid #22d3ee; border-radius: 8px;">
+                        <p style="font-size: 14px; color: #22d3ee; font-weight: 600; margin-bottom: 8px;">🎯 OPEN TO OPPORTUNITIES</p>
+                        <p style="font-size: 14px; color: #cbd5e1; line-height: 1.6;">
+                            Software Engineer • Security Analyst • Cyber Security Analyst • Product Manager
+                        </p>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="mailto:amalhassen991@gmail.com" class="social-link">📧 Email</a>
+                        <a href="https://linkedin.com/in/amalhasse5" target="_blank" class="social-link">💼 LinkedIn</a>
+                        <a href="https://github.com/amalhasse3" target="_blank" class="social-link">💻 GitHub</a>
+                        <span class="social-link">📍 Minneapolis, MN</span>
+                    </div>
+
+                    <div class="cta-buttons">
+                        <a href="#contact" class="btn-primary">Get In Touch</a>
+                        <a href="#projects" class="btn-secondary">View Projects</a>
+                    </div>
+                </div>
+
+                <img src="Amal_H.JPG" alt="Amal Hassen" class="profile-photo">
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="nav-container">
+                <button class="nav-btn active" onclick="showSection('about')">about</button>
+                <button class="nav-btn" onclick="showSection('experience')">experience</button>
+                <button class="nav-btn" onclick="showSection('projects')">projects</button>
+                <button class="nav-btn" onclick="showSection('skills')">skills</button>
+                <button class="nav-btn" onclick="showSection('certifications')">certifications</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- About Section -->
+            <div id="about" class="section active">
+                <h2>
+                    <div class="section-line"></div>
+                    About Me
+                </h2>
+
+                <div class="about-content">
+                    <div class="about-text">
+                        <p style="margin-bottom: 16px;">
+                            I'm a first-generation college student driven by a passion for technology and its power to create meaningful change. With interests across software engineering, cloud computing, IT, security analysis, and product management, I'm especially inspired by how innovation can transform everyday experiences—especially where tech meets fashion, beauty, and accessibility.
+                        </p>
+                        <p style="margin-bottom: 16px;">
+                            My hands-on experience as a GSOC Analyst has strengthened my skills in threat detection, incident response, and critical thinking under pressure. Combined with my leadership role at Amazon, I've developed strong communication, adaptability, and problem-solving abilities that I bring to every team and project I'm part of. My AI for Product Management certification reflects my growing interest in bridging technical excellence with user-centered product strategy.
+                        </p>
+                        <p>
+                            Currently pursuing a degree in Computer Science at the University of Minnesota, I'm constantly applying what I learn in class to real-world challenges—from system operations and data analysis to user experience and risk management. I'm a fast learner, detail-oriented, and thrive in team environments. I'm now seeking internship opportunities in software engineering, security analysis, product management, and project management where I can contribute, grow, and make a lasting impact in the tech space.
+                        </p>
+                    </div>
+
+                    <div class="about-highlights">
+                        <div class="highlight-card">
+                            <h3>🎓 Education</h3>
+                            <p>University of Minnesota Twin Cities</p>
+                            <p style="font-size: 13px; margin-top: 4px;">BA in Computer Science</p>
+                            <p style="font-size: 13px; color: #64748b;">Expected May 2027</p>
+                        </div>
+
+                        <div class="highlight-card">
+                            <h3>🏆 Honors</h3>
+                            <p>MLK Scholar</p>
+                            <p style="font-size: 13px; margin-top: 8px;">Rezzy Foundation Scholarship</p>
+                            <p style="font-size: 13px; margin-top: 8px;">Academy of Math & Science Scholar</p>
+                        </div>
+
+                        <div class="highlight-card">
+                            <h3>🌟 Interests</h3>
+                            <p>Product Management, Fashion & Beauty Tech, Cybersecurity, Social Innovation, Mentoring, Accessibility, Adventurous Travel</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experience Section -->
+            <div id="experience" class="section">
+                <h2>
+                    <div class="section-line" style="background: linear-gradient(180deg, #a855f7, #ec4899);"></div>
+                    Experience
+                </h2>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <div class="timeline-title">Global Security Operations Analyst</div>
+                            <div class="timeline-company">Allied Universal / Abbott</div>
+                            <div class="timeline-date">Feb 2025 – Aug 2025 | Little Canada, MN</div>
+                        </div>
+                        <ul class="timeline-description">
+                            <li>Monitored and triaged 200+ daily alerts across surveillance tools, access control systems, and communication platforms, ensuring rapid incident response</li>
+                            <li>Collaborated with emergency services and cross-functional teams to escalate and resolve 50+ security events, reducing potential risk exposure by 15%</li>
+                            <li>Produced and maintained 100+ detailed security reports, improving incident tracking accuracy and supporting compliance with corporate risk standards</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <div class="timeline-title">AI Fellow Engineer</div>
+                            <div class="timeline-company">Handshake</div>
+                            <div class="timeline-date">Dec 2025 – Present | Remote</div>
+                        </div>
+                        <div class="timeline-description">
+                            <p>Participating in AI engineering fellowship program focused on building production-ready AI applications and learning industry best practices.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <div class="timeline-title">Learning Ambassador</div>
+                            <div class="timeline-company">Amazon</div>
+                            <div class="timeline-date">Sep 2022 – May 2023 | Shakopee, MN</div>
+                        </div>
+                        <ul class="timeline-description">
+                            <li>Trained and mentored 150+ new associates across 3 departments, ensuring smooth onboarding, safety compliance, and consistent knowledge transfer</li>
+                            <li>Supervised 40+ associates per shift and resolved workflow issues in real time, boosting team productivity by 15% during high-volume operations</li>
+                            <li>Analyzed workflow metrics to identify bottlenecks, guiding process improvements that increased inventory efficiency and reduced delays</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <div class="timeline-title">Process Assistant Manager</div>
+                            <div class="timeline-company">Amazon</div>
+                            <div class="timeline-date">Jun 2021 – Dec 2022 | Lakeville, MN</div>
+                        </div>
+                        <ul class="timeline-description">
+                            <li>Supervised 40+ associates per shift during peak operations, improving team productivity by 15% through coaching and workflow coordination</li>
+                            <li>Monitored and analyzed workflow metrics to identify bottlenecks, leading to 10% faster inventory processing and improved on-time order fulfillment</li>
+                            <li>Partnered with operations leadership to enforce safety standards and streamline daily shift handoffs, reducing errors and downtime</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <div class="timeline-title">VP of Logistics/Operations</div>
+                            <div class="timeline-company">Net Impact UMN</div>
+                            <div class="timeline-date">Nov 2025 – Present</div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <div class="timeline-title">Public Relations Chair</div>
+                            <div class="timeline-company">ColorStack UMN</div>
+                            <div class="timeline-date">Oct 2025 – Present</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projects Section -->
+            <div id="projects" class="section">
+                <h2>
+                    <div class="section-line" style="background: linear-gradient(180deg, #4ade80, #10b981);"></div>
+                    Featured Projects
+                </h2>
+
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <span class="project-badge">Java • JSON • OOP</span>
+                        <h3 class="project-title">Hospital Management System</h3>
+                        <p class="project-description">
+                            A secure, console-based hospital admin system supporting patient record creation, search, updates, and discharge with persistent JSON storage. Features modular object-oriented architecture and comprehensive error handling.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-pill">Java</span>
+                            <span class="tech-pill">JSON</span>
+                            <span class="tech-pill">OOP</span>
+                            <span class="tech-pill">Data Structures</span>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <span class="project-badge">Snap • AR • Lens Studio</span>
+                        <h3 class="project-title">AR Development Externship</h3>
+                        <p class="project-description">
+                            Building AR projects using Lens Studio with real-time image tracking, animations, and creative coding. Designing a natural AR filter inclusive for all genders focused on maintaining authentic appearance.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-pill">Lens Studio</span>
+                            <span class="tech-pill">AR</span>
+                            <span class="tech-pill">JavaScript</span>
+                            <span class="tech-pill">Computer Vision</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills Section -->
+            <div id="skills" class="section">
+                <h2>
+                    <div class="section-line" style="background: linear-gradient(180deg, #f59e0b, #ef4444);"></div>
+                    Technical Skills
+                </h2>
+
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>Programming Languages</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Java</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">C</span>
+                            <span class="skill-tag">C++</span>
+                            <span class="skill-tag">Assembly</span>
+                            <span class="skill-tag">JavaScript</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>Cloud & AWS</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">EC2</span>
+                            <span class="skill-tag">Lambda</span>
+                            <span class="skill-tag">API Gateway</span>
+                            <span class="skill-tag">AWS CLI</span>
+                            <span class="skill-tag">Cloud Architecture</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>Development Tools</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">Eclipse</span>
+                            <span class="skill-tag">Visual Studio</span>
+                            <span class="skill-tag">IntelliJ</span>
+                            <span class="skill-tag">PyCharm</span>
+                            <span class="skill-tag">Arduino IDE</span>
+                            <span class="skill-tag">Lens Studio</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>Core Competencies</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Data Structures</span>
+                            <span class="skill-tag">Algorithms</span>
+                            <span class="skill-tag">Security Operations</span>
+                            <span class="skill-tag">Incident Response</span>
+                            <span class="skill-tag">Threat Detection</span>
+                            <span class="skill-tag">Machine Learning</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>Product Management</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">AI Product Strategy</span>
+                            <span class="skill-tag">User Research</span>
+                            <span class="skill-tag">Product Analytics</span>
+                            <span class="skill-tag">Roadmap Planning</span>
+                            <span class="skill-tag">Stakeholder Management</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>Soft Skills</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Leadership</span>
+                            <span class="skill-tag">Communication</span>
+                            <span class="skill-tag">Team Collaboration</span>
+                            <span class="skill-tag">Problem Solving</span>
+                            <span class="skill-tag">Critical Thinking</span>
+                            <span class="skill-tag">Adaptability</span>
+                            <span class="skill-tag">Mentoring</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certifications Section -->
+            <div id="certifications" class="section">
+                <h2>
+                    <div class="section-line" style="background: linear-gradient(180deg, #8b5cf6, #d946ef);"></div>
+                    Certifications & Awards
+                </h2>
+
+                <div class="cert-grid">
+                    <div class="cert-card">
+                        <div class="cert-icon">🏅</div>
+                        <div class="cert-content">
+                            <h3>IBM Machine Learning Specialist - Associate</h3>
+                            <div class="cert-issuer">IBM</div>
+                            <div class="cert-date">Issued Jul 2025</div>
+                        </div>
+                    </div>
+
+                    <div class="cert-card">
+                        <div class="cert-icon">🤖</div>
+                        <div class="cert-content">
+                            <h3>AI for Product Management</h3>
+                            <div class="cert-issuer">Pendo.io</div>
+                            <div class="cert-date">Issued Jun 2025</div>
+                        </div>
+                    </div>
+
+                    <div class="cert-card">
+                        <div class="cert-icon">☁️</div>
+                        <div class="cert-content">
+                            <h3>AWS Cloud Practitioner Essentials</h3>
+                            <div class="cert-issuer">Amazon Web Services</div>
+                            <div class="cert-date">Issued Jun 2025</div>
+                        </div>
+                    </div>
+
+                    <div class="cert-card">
+                        <div class="cert-icon">🏗️</div>
+                        <div class="cert-content">
+                            <h3>AWS Solutions Architect Associate</h3>
+                            <div class="cert-issuer">Amazon Web Services</div>
+                            <div class="cert-date">Practice Set Completion - Jun 2025</div>
+                        </div>
+                    </div>
+
+                    <div class="cert-card">
+                        <div class="cert-icon">👨‍💻</div>
+                        <div class="cert-content">
+                            <h3>Advanced Technical Interview Prep</h3>
+                            <div class="cert-issuer">CodePath</div>
+                            <div class="cert-date">Jan 2026 - Present</div>
+                        </div>
+                    </div>
+
+                    <div class="cert-card">
+                        <div class="cert-icon">🎓</div>
+                        <div class="cert-content">
+                            <h3>MLK Scholar</h3>
+                            <div class="cert-issuer">University of Minnesota</div>
+                            <div class="cert-date">Jul 2025</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <h2>Let's Connect</h2>
+            <p class="footer-desc">
+                I'm actively seeking internship opportunities in software engineering, security analysis, product management, and project management. 
+                Let's connect and explore how I can contribute to your team!
+            </p>
+            
+            <div class="contact-links">
+                <a href="mailto:amalhassen991@gmail.com">📧 amalhassen991@gmail.com</a>
+                <a href="tel:+16123876277">📱 (612) 387-6277</a>
+                <a href="https://linkedin.com/in/amalhasse5" target="_blank">💼 LinkedIn</a>
+                <a href="https://github.com/amalhasse3" target="_blank">💻 GitHub</a>
+                <span>📍 Minneapolis, MN</span>
+            </div>
+
+            <p style="margin-top: 40px; text-align: center; color: #64748b; font-size: 14px;">
+                © 2025 Amal Hassen. Built with passion for innovation.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        function showSection(sectionName) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Remove active class from all nav buttons
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(sectionName).classList.add('active');
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+
+            // Smooth scroll to top of section
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
